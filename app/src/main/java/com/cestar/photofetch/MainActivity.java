@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -30,13 +31,13 @@ public class MainActivity extends ActionBarActivity {
     // Required for camera to save image file on resume from camera app
     private String mCurrentPhotoPath;
     //private Uri mCapturedImageURI;
-
+    private String mLabelVal;
 
     // widgetes
     private ImageView mImageView;
     private Button mPicButton;
-
-
+    private Button mRetrieveButton;
+    private EditText mLabel;
     @Override
 
 
@@ -45,19 +46,38 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Step 1 setup widgets
+        //mLabel = (EditText)findViewById(R.id.textView);
         mImageView = (ImageView) findViewById(R.id.imageView);
         mPicButton = (Button) findViewById(R.id.picButton);
+        mRetrieveButton = (Button) findViewById(R.id.retreivebutton);
         // Step 2 on click of "take picture button" send an intent to existing camera app
         // to handle picture taking.
         mPicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String nameTextVal;
+                mLabelVal=mLabel.getText().toString();
                 dispatchTakePictureIntent();
             }
         });
 
+        mRetrieveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nameTextVal;
+                mLabelVal=mLabel.getText().toString();
+                doRetreival();
+            }
+        });
     }
 
+
+    public void doRetreival()
+    {
+        Intent switchToRetrieve = new Intent(this,RetrieveActivity.class );
+        startActivity(switchToRetrieve);
+        // or alternatively use the mLabel Val to find the image file.
+    }
 
     // Driver to :
     //  - get file
@@ -117,6 +137,9 @@ public class MainActivity extends ActionBarActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             mImageView.setImageBitmap(imageBitmap);
+            ///!!!!! need to save this image path and associate it with a label
+            // Need to associate the label with the image file path here.
+            //
         }
 
     }
