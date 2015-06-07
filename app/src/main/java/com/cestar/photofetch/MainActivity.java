@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
     //private Uri mCapturedImageURI;
     private String mLabelVal;
 
+
     // widgetes
     private ImageView mImageView;
     private Button mPicButton;
