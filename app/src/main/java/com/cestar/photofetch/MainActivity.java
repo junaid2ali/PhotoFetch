@@ -66,7 +66,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 String nameTextVal;
-                mLabelVal=mLabel.getText().toString();
+                //mLabelVal=mLabel.getText().toString();
                 doRetreival();
             }
         });
@@ -75,7 +75,8 @@ public class MainActivity extends ActionBarActivity {
 
     public void doRetreival()
     {
-        Intent switchToRetrieve = new Intent(this,RetrieveActivity.class );
+        //Intent switchToRetrieve = new Intent(this,RetrieveActivity.class ); // comment to test SavePict
+        Intent switchToRetrieve = new Intent(this,SavePicture.class );  // added to test Save Pict.java
         startActivity(switchToRetrieve);
         // or alternatively use the mLabel Val to find the image file.
     }
