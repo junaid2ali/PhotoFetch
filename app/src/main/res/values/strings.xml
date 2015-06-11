@@ -21,4 +21,5 @@
         <item>US</item>
         <item>UTILITIES</item>
     </string-array>
+    <string name="title_activity_category_lists">CategoryListsActivity</string>
 </resources>

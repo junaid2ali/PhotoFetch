@@ -6,6 +6,7 @@ package com.cestar.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 //import com.charlesli.actor.HighScore;
 
@@ -90,6 +92,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 */
+
+
+    public ArrayList<String> getCategories()
+    {
+        System.out.println("done first");
+        ArrayList<String> categories = new ArrayList<String>();
+
+        String query = "SELECT category from picturedB";
+
+        Cursor cursor = myDataBase.rawQuery(query, new String[]{});
+
+        System.out.println("done");
+        if (cursor.moveToFirst()) {
+            do{
+                categories.add(cursor.getString(0));
+                System.out.println("The best " + cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        return categories;
+    }
+
+
+
     public void insertRecord(String str_name, String str_category, String str_comments, String str_path)
     {
         SQLiteDatabase database = this.getWritableDatabase();

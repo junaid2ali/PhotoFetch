@@ -30,7 +30,11 @@
         </activity>
         <activity
             android:name=".SavePicture"
-            android:label="SavePicture">
+            android:label="SavePicture" >
+        </activity>
+        <activity
+            android:name=".CategoryListsActivity"
+            android:label="@string/title_activity_category_lists" >
         </activity>
     </application>
 
