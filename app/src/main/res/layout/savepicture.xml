@@ -67,4 +67,13 @@
         android:layout_centerHorizontal="true"
         android:linksClickable="false" />
 
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/lbl_category"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/lbl_comments" />
+
 </RelativeLayout>

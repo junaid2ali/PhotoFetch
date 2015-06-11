@@ -39,6 +39,9 @@ public class MainActivity extends ActionBarActivity {
     private Button mPicButton;
     private Button mRetrieveButton;
     private EditText mLabel;
+
+    // creating temp button for testing - LS
+    private Button tempButton;
     @Override
 
 
@@ -51,13 +54,15 @@ public class MainActivity extends ActionBarActivity {
         mImageView = (ImageView) findViewById(R.id.imageView);
         mPicButton = (Button) findViewById(R.id.picButton);
         mRetrieveButton = (Button) findViewById(R.id.retreivebutton);
+        tempButton = (Button) findViewById(R.id.temp); // LS
+
         // Step 2 on click of "take picture button" send an intent to existing camera app
         // to handle picture taking.
         mPicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String nameTextVal;
-                mLabelVal=mLabel.getText().toString();
+                //mLabelVal=mLabel.getText().toString();
                 dispatchTakePictureIntent();
             }
         });
@@ -70,13 +75,27 @@ public class MainActivity extends ActionBarActivity {
                 doRetreival();
             }
         });
+
+        // temp button - LS
+        tempButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotosavePict();
+            }
+        });
+    }
+
+    // temp method - LS
+    public void gotosavePict()
+    {
+        Intent gosavePict = new Intent(this,SavePicture.class );
+        startActivity(gosavePict);
     }
 
 
     public void doRetreival()
     {
-        //Intent switchToRetrieve = new Intent(this,RetrieveActivity.class ); // comment to test SavePict
-        Intent switchToRetrieve = new Intent(this,SavePicture.class );  // added to test Save Pict.java
+        Intent switchToRetrieve = new Intent(this,RetrieveActivity.class ); // comment to test SavePict
         startActivity(switchToRetrieve);
         // or alternatively use the mLabel Val to find the image file.
     }
@@ -171,6 +190,10 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        else if (id == android.R.id.home)
+        {
+
         }
 
         return super.onOptionsItemSelected(item);

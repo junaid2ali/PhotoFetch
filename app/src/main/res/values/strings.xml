@@ -4,4 +4,21 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_retrieve">RetrieveActivity</string>
+    <string-array name="photo_category">
+        <item>AIRLINE</item>
+        <item>AUTO</item>
+        <item>BANK</item>
+        <item>CANADA</item>
+        <item>CLUB</item>
+        <item>CREDIT CARD</item>
+        <item>DEPARTMENT</item>
+        <item>GIFT CARD</item>
+        <item>HOTEL/MOTEL</item>
+        <item>INSURANCE</item>
+        <item>GAS</item>
+        <item>OTHER</item>
+        <item>TELEPHONE</item>
+        <item>US</item>
+        <item>UTILITIES</item>
+    </string-array>
 </resources>
