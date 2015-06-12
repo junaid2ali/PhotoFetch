@@ -22,4 +22,6 @@
         <item>UTILITIES</item>
     </string-array>
     <string name="title_activity_category_lists">CategoryListsActivity</string>
+    <string name="title_activity_photo_lookup_grid">PhotoLookupGridActivity</string>
+    <string name="title_activity_view_image">ViewImageActivity</string>
 </resources>
