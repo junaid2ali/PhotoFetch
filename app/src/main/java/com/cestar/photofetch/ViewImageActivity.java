@@ -1,17 +1,40 @@
 package com.cestar.photofetch;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
+import java.io.FileNotFoundException;
 
 
 public class ViewImageActivity extends ActionBarActivity {
+
+    private ImageView mImageView;
+    private Bitmap mBitmap;
+    private String mUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_image);
+
+        Intent intent = getIntent();
+        mUrl = intent.getStringExtra("IMAGE_URL");
+
+        mImageView = (ImageView) findViewById(R.id.viewImageIV);
+
+        try {
+            mBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.parse(mUrl)));
+            mImageView.setImageBitmap(mBitmap);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
