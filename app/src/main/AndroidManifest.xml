@@ -3,28 +3,18 @@
     package="com.cestar.photofetch" >
 
     <!-- Jeremy start -->
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- Jeremy end -->
     <application
         android:name="com.cestar.application.PhotoFetch"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".RetrieveActivity"
             android:label="@string/title_activity_retrieve" >
@@ -34,16 +24,26 @@
             android:label="SavePicture" >
         </activity>
         <activity
-            android:name=".CategoryListsActivity"
-            android:label="@string/title_activity_category_lists" >
-        </activity>
-        <activity
             android:name=".PhotoLookupGridActivity"
             android:label="@string/title_activity_photo_lookup_grid" >
         </activity>
         <activity
             android:name=".ViewImageActivity"
             android:label="@string/title_activity_view_image" >
+        </activity>
+        <activity
+            android:name=".MainSwipeActivity"
+            android:label="@string/title_activity_main_swipe" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".VideoServer"
+            android:label="@string/title_activity_video_server" >
+
         </activity>
     </application>
 

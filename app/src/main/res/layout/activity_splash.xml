@@ -4,9 +4,12 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.cestar.fragment.CategoryListsFragment">
+    tools:context="com.cestar.photofetch.SplashActivity"
+    android:background="#109de8">
 
-    <ListView android:id="@+id/list_cat" android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+    <ImageView android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:src="@drawable/splash_image"/>
 
 </RelativeLayout>

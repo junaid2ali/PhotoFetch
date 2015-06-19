@@ -11,6 +11,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.cestar.actor.PhotoImage;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -99,7 +101,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         System.out.println("done first");
         ArrayList<String> categories = new ArrayList<String>();
 
-        String query = "SELECT category from picturedB";
+        String query = "SELECT DISTINCT category from picturedB ORDER BY category ASC";
 
         Cursor cursor = myDataBase.rawQuery(query, new String[]{});
 
@@ -108,6 +110,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do{
                 categories.add(cursor.getString(0));
                 System.out.println("The best " + cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        return categories;
+    }
+
+    public ArrayList<PhotoImage> getImages()
+    {
+
+        ArrayList<PhotoImage> categories = new ArrayList<PhotoImage>();
+
+        String query = "SELECT * from picturedB";
+
+        Cursor cursor = myDataBase.rawQuery(query, new String[]{});
+
+
+        if (cursor.moveToFirst()) {
+            do{
+                categories.add(new PhotoImage(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3)));
+                System.out.println(cursor.getString(0) +  cursor.getString(1) + cursor.getString(2) + cursor.getString(3));
             } while (cursor.moveToNext());
         }
         return categories;

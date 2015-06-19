@@ -24,4 +24,14 @@
     <string name="title_activity_category_lists">CategoryListsActivity</string>
     <string name="title_activity_photo_lookup_grid">PhotoLookupGridActivity</string>
     <string name="title_activity_view_image">ViewImageActivity</string>
+    <string name="title_activity_main_swipe">MainSwipeActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_video_server">VideoServer</string>
 </resources>

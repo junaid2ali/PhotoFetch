@@ -1,39 +1,57 @@
 package com.cestar.photofetch;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 
 
-public class ViewImageActivity extends ActionBarActivity {
+public class ViewImageActivity extends AppCompatActivity {
 
     private ImageView mImageView;
     private Bitmap mBitmap;
-    private String mUrl;
+    private String imgPath;
+    private String title;
+    private String description;
+
+    private TextView titleTV;
+    private TextView descriptionTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_image);
 
-        Intent intent = getIntent();
-        mUrl = intent.getStringExtra("IMAGE_URL");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            imgPath = extras.getString("PATH");
+            title = extras.getString("TITLE");
+            description = extras.getString("DESCRIPTION");
+        }
 
         mImageView = (ImageView) findViewById(R.id.viewImageIV);
+        titleTV = (TextView) findViewById(R.id.im_title);
+        descriptionTV  = (TextView) findViewById(R.id.im_description);
+
+        titleTV.setText(title.toUpperCase());
+        descriptionTV.setText(description.toUpperCase());
 
         try {
-            mBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.parse(mUrl)));
-            mImageView.setImageBitmap(mBitmap);
-        } catch (FileNotFoundException e) {
+
+                File imgFile = new  File(imgPath);
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                mImageView.setImageBitmap(myBitmap);
+                mImageView.setRotation(90);
+
+        } catch (Exception e) {
             e.printStackTrace();
+            onBackPressed();
         }
     }
 

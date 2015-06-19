@@ -1,8 +1,10 @@
 package com.cestar.photofetch;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,32 +12,44 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.cestar.db.DataBaseHelper;
 
+import java.io.File;
+
 /**
  * Created by lasha on 2015-06-08.
  */
-public class SavePicture extends ActionBarActivity {
+public class SavePicture extends AppCompatActivity {
 
     EditText e_name;
     EditText e_category;
     EditText e_comments;
     Button b_save;
+    ImageView displayImage;
+    String imgPath;
 
     // Declare Strings and save the TextViews
-    String  str_name, str_category, str_comments, str_path;
+    String  str_name, str_category, str_comments, str_path, imagePath;
+    Bitmap im;
 
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
-
+    byte[] data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.savepicture);
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            imgPath = extras.getString("PATH");
+        }
 
         //Create the spinner
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -70,6 +84,7 @@ public class SavePicture extends ActionBarActivity {
         e_name = (EditText) findViewById(R.id.txt_name);
         e_category = (EditText) findViewById(R.id.txt_category);
         e_comments = (EditText) findViewById(R.id.txt_comments);
+        displayImage = (ImageView) findViewById(R.id.display_image);
 
         b_save = (Button) findViewById(R.id.b_save);
 
@@ -81,7 +96,12 @@ public class SavePicture extends ActionBarActivity {
                 str_name = e_name.getText().toString();
                 //str_category = e_category.getText().toString(); // commented since its getting from spinner
                 str_comments = e_comments.getText().toString();
-                str_path = "path/path/path/fileName.jpg"; // this can be linked with mainActivity
+
+
+                File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                        "MyCameraApp");
+                str_path = mediaStorageDir.getPath() + File.separator
+                        + "IMG_" + str_name + ".jpg"; // this can be linked with mainActivity
 
                 //Check if all the fields are NOT null
                 Boolean Sfield = false;
@@ -100,8 +120,13 @@ public class SavePicture extends ActionBarActivity {
                 if(Sfield & Cfield & COfield & Pfield)
                 {
                     System.out.println("all fields are OK.. READY to write to dB");
-                    System.out.println(str_name +" " +str_category+" " +str_comments+" " +str_path);
+                    System.out.println(str_name + " " + str_category + " " + str_comments + " " + str_path);
                     write2dB();
+
+                    //Go Back to main page
+                    finish();
+                    Toast msg = Toast.makeText(getBaseContext(), "Picture Saved Successfully", Toast.LENGTH_LONG);
+                    msg.show();
                 }
                 else
                 {
@@ -112,6 +137,13 @@ public class SavePicture extends ActionBarActivity {
             }
         });
 
+        //show the image
+        File imgFile = new  File(imgPath);
+        if(imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            displayImage.setImageBitmap(myBitmap);
+            displayImage.setRotation(90);
+        }
 
     }
 
@@ -132,13 +164,9 @@ public class SavePicture extends ActionBarActivity {
         try{
             dbHelper.openDataBase();
             System.out.println("Going to write data");
-            dbHelper.insertRecord(str_name, str_category, str_comments, str_path);
+            dbHelper.insertRecord(str_name, str_category, str_comments, imgPath);
             System.out.println("Data written");
             dbHelper.close();
-
-            //Go Back to main page
-            Intent Goback = new Intent(this,MainActivity.class );
-            startActivity(Goback);
 
         }catch (Exception e)
         {
@@ -174,4 +202,7 @@ public class SavePicture extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

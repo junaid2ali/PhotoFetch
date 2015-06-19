@@ -3,13 +3,21 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/savePicts">
 
+
+    <ImageView
+        android:id="@+id/display_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Name"
         android:id="@+id/lbl_name"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/display_image"
         android:layout_centerHorizontal="true" />
 
     <EditText
