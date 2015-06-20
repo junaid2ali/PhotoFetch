@@ -20,6 +20,8 @@ import com.cestar.gridviewhelper.AbsListViewBaseActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
@@ -115,8 +117,9 @@ public class PhotoLookupGridActivity  extends AbsListViewBaseActivity{
                 holder = (ViewHolder) view.getTag();
             }
 
+
             File imgFile = new  File(images.get(position).getPath());
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            Bitmap myBitmap = decodeFile(imgFile);
             holder.imageView.setImageBitmap(RotateBitmap(myBitmap, 90));
             holder.imageTitle.setText(images.get(position).getName());
             holder.progress.setVisibility(View.INVISIBLE);
@@ -174,6 +177,32 @@ public class PhotoLookupGridActivity  extends AbsListViewBaseActivity{
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+    }
+
+    // Decodes image and scales it to reduce memory consumption
+    private Bitmap decodeFile(File f) {
+        try {
+            // Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(new FileInputStream(f), null, o);
+
+            // The new size we want to scale to
+            final int REQUIRED_SIZE=70;
+
+            // Find the correct scale value. It should be the power of 2.
+            int scale = 8;
+            while(o.outWidth / scale / 2 >= REQUIRED_SIZE &&
+                    o.outHeight / scale / 2 >= REQUIRED_SIZE) {
+                scale *= 2;
+            }
+
+            // Decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+            return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+        } catch (FileNotFoundException e) {}
+        return null;
     }
 
 }
