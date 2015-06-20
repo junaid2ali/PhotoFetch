@@ -115,12 +115,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return categories;
     }
 
-    public ArrayList<PhotoImage> getImages()
+    public ArrayList<PhotoImage> getImages(String cat)
     {
 
         ArrayList<PhotoImage> categories = new ArrayList<PhotoImage>();
 
-        String query = "SELECT * from picturedB";
+        String query = "SELECT * from picturedB WHERE category = '" + cat;
 
         Cursor cursor = myDataBase.rawQuery(query, new String[]{});
 

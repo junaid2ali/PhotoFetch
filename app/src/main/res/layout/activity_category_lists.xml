@@ -9,4 +9,11 @@
     <ListView android:id="@+id/list_cat" android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/empty_list"
+        android:text="No pictures"
+        android:visibility="invisible"/>
+
 </RelativeLayout>

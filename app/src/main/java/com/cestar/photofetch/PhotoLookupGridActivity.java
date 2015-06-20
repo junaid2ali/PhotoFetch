@@ -162,7 +162,7 @@ public class PhotoLookupGridActivity  extends AbsListViewBaseActivity{
         try {
             dbHelper.createDataBase();
             dbHelper.openDataBase();
-            images = dbHelper.getImages();
+            images = dbHelper.getImages(category);
         }
         catch(Exception e)
         {

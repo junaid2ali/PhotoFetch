@@ -24,6 +24,7 @@ public class CategoryListsFragment extends Fragment {
 
     DataBaseHelper dbHelper;
     ArrayList<String> categories;
+    TextView emptyText;
 
     ListView list;
     private ListAdapter adapter;
@@ -97,7 +98,17 @@ public class CategoryListsFragment extends Fragment {
             dbHelper.createDataBase();
             dbHelper.openDataBase();
             categories = dbHelper.getCategories();
+            emptyText = (TextView) getView().findViewById(R.id.empty_list);
+            if(categories.size() == 0){
 
+                emptyText.setVisibility(View.VISIBLE);
+                list.setVisibility(View.INVISIBLE);
+            }
+            else
+            {
+                emptyText.setVisibility(View.INVISIBLE);
+                list.setVisibility(View.VISIBLE);
+            }
         }
         catch(Exception e)
         {
