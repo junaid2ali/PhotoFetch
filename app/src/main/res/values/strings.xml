@@ -5,6 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_retrieve">RetrieveActivity</string>
+    <string name="banner_ad_unit_id">ca-app-pub-9943604836792192/2026718060</string>
 
     <string-array name="photo_category">
         <item>AIRLINE</item>

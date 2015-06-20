@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height="match_parent" android:paddingLeft="3dp"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:paddingRight="3dp"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
@@ -19,14 +20,28 @@
             android:layout_alignParentEnd="true"
             android:layout_margin="1dp"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_start"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/touch_circle"
-            android:onClick="captureImage">
-        </ImageView>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_start"
+        android:layout_above="@id/adView"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/touch_circle"
+        android:onClick="captureImage">
+    </ImageView>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
+
+
 
 </RelativeLayout>

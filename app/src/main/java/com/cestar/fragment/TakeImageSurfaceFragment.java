@@ -14,6 +14,8 @@ import android.widget.ImageView;
 
 import com.cestar.photofetch.R;
 import com.cestar.photofetch.SavePicture;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,6 +41,11 @@ public class TakeImageSurfaceFragment extends android.support.v4.app.Fragment im
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_take_image_surface, null);
+
+        AdView mAdView = (AdView) v.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         //get the width and height of the android device
         dm = new DisplayMetrics();
